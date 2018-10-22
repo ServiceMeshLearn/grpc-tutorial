@@ -1,4 +1,7 @@
 syntax = "proto3";
+
+import "google/api/annotations.proto";
+
 package api;
 
 message PingMessage {
@@ -6,5 +9,10 @@ message PingMessage {
 }
 
 service Ping {
-    rpc SayHello(PingMessage) returns (PingMessage) {}
+    rpc SayHello(PingMessage) returns (PingMessage) {
+        option (google.api.http) = {
+          post: "/v1/ping"
+          body: "*"
+        };
+    }
 }
